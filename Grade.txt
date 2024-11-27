@@ -1,0 +1,128 @@
+// html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Evaluator</title>
+</head>
+<body>
+
+    <div>
+        <h1>Student Grade Evaluator</h1>
+        
+        <form id="gradeForm">
+            <label for="fullName">Full Name:</label>
+            <input type="text" id="fullName" required>
+            <br><br>
+
+            <label for="math">Math:</label>
+            <input type="number" id="math" required min="0" max="100">
+            <br><br>
+
+            <label for="science">Science:</label>
+            <input type="number" id="science" required min="0" max="100">
+            <br><br>
+
+            <label for="english">English:</label>
+            <input type="number" id="english" required min="0" max="100">
+            <br><br>
+
+            <label for="filipino">Filipino:</label>
+            <input type="number" id="filipino" required min="0" max="100">
+            <br><br>
+
+            <label for="pe">P.E.:</label>
+            <input type="number" id="pe" required min="0" max="100">
+            <br><br>
+
+            <button type="submit">Evaluate Grades</button>
+        </form>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+// css
+
+   body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full height of the viewport */
+            margin: 0; /* Remove default margin */
+            background-color: #f0f0f0; /* Optional background color */
+        }
+        form {
+            background: white; /* Background for the form */
+            padding: 20px; /* Padding around the form */
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        .result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+// java script
+document.addEventListener('DOMContentLoaded', () => {
+    const gradeForm = document.getElementById('gradeForm');
+    const resultDiv = document.getElementById('result');
+
+    gradeForm.addEventListener('submit', (event) => {
+        event.preventDefault(); // Prevent form submission
+
+        const fullName = document.getElementById('fullName').value;
+        const grades = [
+            parseInt(document.getElementById('math').value),
+            parseInt(document.getElementById('science').value),
+            parseInt(document.getElementById('english').value),
+            parseInt(document.getElementById('filipino').value),
+            parseInt(document.getElementById('pe').value)
+        ];
+
+        let excellentCount = 0;
+        let poorCount = 0;
+        let results = [];
+
+        // Evaluate grades
+        for (let grade of grades) {
+            if (grade >= 90) {
+                results.push("Excellent");
+                excellentCount++;
+            } else if (grade >= 80) {
+                results.push("Good");
+            } else if (grade >= 70) {
+                results.push("Average");
+            } else if (grade >= 60) {
+                results.push("Poor");
+            } else {
+                results.push("Fail");
+                poorCount++;
+            }
+        }
+
+        // Determine ranking
+        let ranking;
+        if (excellentCount === 5) {
+            ranking = "Top Honor Student";
+        } else if (excellentCount >= 3) {
+            ranking = "Second Honorable Student";
+        } else if (poorCount === 5) {
+            ranking = "Repeater";
+        } else {
+            ranking = "Regular Student";
+        }
+
+        // Display results
+        resultDiv.innerHTML = `
+            <p>${fullName}, your grades are:</p>
+            <ul>
+                ${results.map((result, index) => `<li>Subject ${index + 1}: ${result}</li>`).join('')}
+            </ul>
+            <p>Ranking: ${ranking}</p>
+        `;
+    });
+});

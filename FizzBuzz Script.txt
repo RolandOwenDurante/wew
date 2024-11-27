@@ -1,0 +1,37 @@
+// FizzBuzz Script
+for (let i = 1; i <= 100; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+        console.log("FizzBuzz");
+    } else if (i % 3 === 0) {
+        console.log("Fizz");
+    } else if (i % 5 === 0) {
+        console.log("Buzz");
+    } else {
+        console.log(i);
+    }
+}
+// 99 Bottles of Beer Script
+for (let i = 99; i > 0; i--) {
+    if (i > 1) {
+        console.log(`${i} bottles of beer on the wall, ${i} bottles of beer.`);
+        console.log(`Take one down, pass it around, ${i - 1} bottles of beer on the wall.\n`);
+    } else {
+        console.log(`${i} bottle of beer on the wall, ${i} bottle of beer.`);
+        console.log(`Take one down, pass it around, no more bottles of beer on the wall.\n`);
+    }
+}
+console.log("No more bottles of beer on the wall, no more bottles of beer.");
+console.log("Go to the store and buy some more, 99 bottles of beer on the wall.");
+
+// Fibonacci Sequence Script
+function generateFibonacci(numTerms) {
+    const fibonacci = [0, 1];
+    for (let i = 2; i < numTerms; i++) {
+        fibonacci[i] = fibonacci[i - 1] + fibonacci[i - 2];
+    }
+    return fibonacci.slice(0, numTerms); // Return only the requested number of terms
+}
+
+// Example usage:
+const numTerms = 10; // Change this value to generate more or fewer terms
+console.log(generateFibonacci(numTerms));
